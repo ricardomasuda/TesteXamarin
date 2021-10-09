@@ -11,21 +11,23 @@
             <StackLayout>
                 <StackLayout>
                     <Label Text="Nome:" TextColor="Black" FontSize="12"/>
-                    <Entry BackgroundColor="Gray"/>
+                    <Entry BackgroundColor="Gray" Text="{Binding Estoque.Nome}" />
                 </StackLayout>
                 <StackLayout>
                     <Label Text="Qunatidade:" TextColor="Black" FontSize="12"/>
-                    <Entry BackgroundColor="Gray" Keyboard="Numeric"/>
-                </StackLayout>
-                <StackLayout>
-                    <Label Text="Data:" TextColor="Black" FontSize="12"/>
-                    <Entry BackgroundColor="Gray" />
+                    <Entry BackgroundColor="Gray" Keyboard="Numeric" Text="{Binding Estoque.Quantidade}"/>
                 </StackLayout>
                 <Button
-                    Text="Cadastrar"
+                    Text="Salvar"
+                    Command="{Binding SalvarCmd}"
+                    />
+                <Button
+                    Text="Deleter"
+                    IsVisible="{Binding ViewBotao}"
+                    Command="{Binding DeleterCmd}"
                     />
             </StackLayout>
         </Frame>
-        
+
     </ContentPage.Content>
 </ContentPage>
