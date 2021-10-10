@@ -1,0 +1,112 @@
+﻿using AppCrud.View.PopUp;
+using Newtonsoft.Json;
+using Rg.Plugins.Popup.Extensions;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Forms;
+
+namespace AppCrud.Model
+{
+    class HttpRequest<Request>
+    {
+        public class ApiResponse
+        {
+            public string Status { get; set; }
+            public List<Object> Conteudo { get; set; }
+        }
+
+        const string URL = "https://unime.site/api";
+        public static async Task<ApiResponse> PostAsync(Request _requisicao, Page _page = null)
+        {
+            var _load = new LoadPage();
+            ApiResponse _return;
+            if (_page != null)
+                await _page.Navigation.PushPopupAsync(_load);
+            try
+            {
+                var _json = JsonConvert.SerializeObject(_requisicao);
+                var _url = URL + ((IRequest)_requisicao).Action;
+
+                HttpClient _client = new HttpClient();
+                _client.Timeout = new TimeSpan(0, 0, 15);
+
+                _client.DefaultRequestHeaders.Accept.Clear();
+                _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("applcation/json"));
+
+                HttpResponseMessage _result = null;
+                if (_requisicao != null)
+                {
+                    var _content = new StringContent(_json, Encoding.UTF8, "application/json");
+                    Debug.WriteLine("--------INICIO-----------");
+
+                    Debug.WriteLine(_json);
+                    _result = await _client.PostAsync(_url, _content);
+                }
+
+                //var _content = new StringContent(_json, Encoding.UTF8, "application/json");
+                //var _result = await _client.PostAsync(_url, _content);
+
+                var _jsonResposta = _result.Content.ReadAsStringAsync().Result;
+
+                Debug.WriteLine("--------fim-----------");
+                Debug.WriteLine(_jsonResposta);
+
+                _return = JsonConvert.DeserializeObject<ApiResponse>(_jsonResposta);
+            }
+            catch (Exception exp)
+            {
+                Debug.WriteLine(exp);
+                _return = default(ApiResponse);
+            }
+            if (_page != null)
+                _load.Close();
+            return _return;
+        }
+        public static async Task<ApiResponse> GetAsync(Request _requisicao, Page _page = null)
+        {
+            ApiResponse _return;
+            InicioPage(true, _page);
+            try
+            {
+                var _url = URL + ((IRequest)_requisicao).Action;
+
+                HttpClient _client = new HttpClient();
+                _client.Timeout = new TimeSpan(0, 0, 15);
+
+                _client.DefaultRequestHeaders.Accept.Clear();
+                _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("applcation/json"));
+
+                HttpResponseMessage _result = null;
+                if (_requisicao != null)
+                {
+                    // var _content = new StringContent( Encoding.UTF8, "application/json");
+                    //  Debug.WriteLine("--------INICIO-----------");
+                    _result = await _client.GetAsync(_url);
+                }
+                var _jsonResposta = _result.Content.ReadAsStringAsync().Result;
+
+                Debug.WriteLine("--------fim-----------");
+                Debug.WriteLine(_jsonResposta);
+
+                _return = JsonConvert.DeserializeObject<ApiResponse>(_jsonResposta);
+            }
+            catch (Exception exp)
+            {
+                Debug.WriteLine(exp);
+                _return = default(ApiResponse);
+            }
+            InicioPage(false, _page);
+            return _return;
+        }
+        public static async void InicioPage(bool inicio, Page _page = null)
+        {
+            var _load = new LoadPage();
+            if (_page != null && inicio)
+                await _page.Navigation.PushPopupAsync(_load);
+            if (_page != null && !inicio)
+                _load.Close();
+        }
+    }
+}
