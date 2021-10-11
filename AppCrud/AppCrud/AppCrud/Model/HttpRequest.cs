@@ -21,7 +21,7 @@ namespace AppCrud.Model
             public List<Object> Conteudo { get; set; }
         }
 
-        const string URL = "https://localhost:44381/api/";
+        const string URL = "https://10.0.2.2:44381/api/";
         public static async Task<ApiResponse> PostAsync(Request _requisicao, Page _page = null)
         {
             var _load = new LoadPage();
@@ -71,9 +71,9 @@ namespace AppCrud.Model
         public static async Task<ApiResponse> GetAsync(Request _requisicao, Page _page = null)
         {
             ApiResponse _return;
-            var _load = new LoadPage();
-            if (_page != null)
-                await _page.Navigation.PushPopupAsync(_load);
+            //var _load = new LoadPage();
+            //if (_page != null)
+            //    await _page.Navigation.PushPopupAsync(_load);
             try
             {
                 var _url = URL + ((IRequest)_requisicao).Action;
@@ -103,8 +103,8 @@ namespace AppCrud.Model
                 Debug.WriteLine(exp);
                 _return = default(ApiResponse);
             }
-            if (_page != null)
-                _load.Close();
+            //if (_page != null)
+            //    _load.Close();
             return _return;
         }
 
