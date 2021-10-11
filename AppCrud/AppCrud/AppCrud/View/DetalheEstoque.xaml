@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppCrud.View.DetalheEstoque"
+             Title="Detalhe Estoque"
                BackgroundColor="#F5F6FA"
              >
     <ContentPage.Content>
@@ -9,19 +10,23 @@
             Margin="10"
             >
             <StackLayout>
-                <StackLayout>
+                <StackLayout >
                     <Label Text="Nome:" TextColor="Black" FontSize="12"/>
-                    <Entry BackgroundColor="Gray" Text="{Binding Estoque.Nome}" />
+                    <Entry BackgroundColor="LightGray" Text="{Binding Estoque.Nome}" />
                 </StackLayout>
                 <StackLayout>
                     <Label Text="Qunatidade:" TextColor="Black" FontSize="12"/>
-                    <Entry BackgroundColor="Gray" Keyboard="Numeric" Text="{Binding Estoque.Quantidade}"/>
+                    <Entry BackgroundColor="LightGray" Keyboard="Numeric" Text="{Binding Estoque.Quantidade}"/>
                 </StackLayout>
                 <Button
+                    Margin="0,20,0,10"
                     Text="Salvar"
+                    BackgroundColor="#6ed1e4"
                     Command="{Binding SalvarCmd}"
                     />
                 <Button
+                    Margin="0,20,0,10"
+                    BackgroundColor="#6ed1e4"
                     Text="Deleter"
                     IsVisible="{Binding ViewBotao}"
                     Command="{Binding DeleterCmd}"

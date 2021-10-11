@@ -3,44 +3,63 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                BackgroundColor="#F5F6FA"
              x:Name="ListarEstoquePage"
+             Title="Crud Estoque"
              x:Class="AppCrud.View.ListarEstoque">
     <ContentPage.Content>
         <StackLayout
              Margin="10">
             <Button
                 CornerRadius="5"
-                BackgroundColor="Aquamarine"
+                BackgroundColor="#6ed1e4"
                 Text="+ CADASTRAR"
                 Command="{Binding Cadastrar}"
                 />
-            <ListView ItemsSource="{Binding ListaEstoque}"
+            <Frame>
+                <ListView ItemsSource="{Binding ListaEstoque}"
                          HasUnevenRows="True" 
                 SeparatorVisibility="None">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Frame CornerRadius="5" >
-                                <Label TextColor="Black" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" >
-                                    <Label.FormattedText >
-                                        <FormattedString >
-                                            <Span Text="{Binding Id}"/>
-                                            <Span Text="Nome:"/>
-                                            <Span Text="{Binding Nome}" />
-                                            <Span Text="Quantidade:"/>
-                                            <Span Text="{Binding Quantidade}" />
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer     
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame CornerRadius="5" BorderColor="Black" >
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                        <StackLayout>
+                                            <Label Text="{Binding Id}" TextColor="Black" FontAttributes="Bold" HorizontalOptions="Start"/>
+                                        </StackLayout>
+                                        <StackLayout HorizontalOptions="CenterAndExpand">
+                                            <Label TextColor="Black" FontAttributes="Bold">
+                                                <Label.FormattedText >
+                                                    <FormattedString >
+                                                        <Span Text="" />
+                                                        <Span Text="{Binding Nome}"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </StackLayout>
+                                        <StackLayout HorizontalOptions="EndAndExpand">
+                                            <Label TextColor="Black" FontAttributes="Bold" >
+                                                <Label.FormattedText >
+                                                    <FormattedString >
+                                                        <Span Text="Quantidade:"/>
+                                                        <Span Text="{Binding Quantidade}"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </StackLayout>
+
+                                    </StackLayout>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer     
                                             Command="{Binding Source={x:Reference ListarEstoquePage}, Path=BindingContext.AtualizarEstoqueCmd}"
                                             CommandParameter="{Binding .}"/>
-                                </Frame.GestureRecognizers>
-                            </Frame>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Frame>
+       
 
         </StackLayout>
     </ContentPage.Content>

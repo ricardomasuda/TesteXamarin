@@ -40,6 +40,7 @@ namespace AppCrud.ViewModel
             App.NavPage.PushAsync(new DetalheEstoque(estoque));
         }
 
+       
 
     }
 }

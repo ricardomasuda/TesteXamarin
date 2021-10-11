@@ -10,5 +10,13 @@ namespace AppCrud.Model
         {
             string Action { get; set; }
         }
+        public class SimpleRequest : IRequest
+        {
+            public string Action { get; set; }
+            public SimpleRequest(string action)
+            {
+                Action = action;
+            }
+        }
     }
 }

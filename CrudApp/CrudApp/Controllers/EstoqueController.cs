@@ -10,7 +10,6 @@ namespace CrudApp.Controllers
     [ApiController]
     public class EstoqueController : ControllerBase
     {
-
         [Route("/api/[controller]")]
         [HttpGet]
         public Response GetListEstoque()
