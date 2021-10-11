@@ -3,9 +3,13 @@ using Newtonsoft.Json;
 using Rg.Plugins.Popup.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using static AppCrud.Model.Request;
 
 namespace AppCrud.Model
 {
@@ -17,7 +21,7 @@ namespace AppCrud.Model
             public List<Object> Conteudo { get; set; }
         }
 
-        const string URL = "https://unime.site/api";
+        const string URL = "https://localhost:44381/api";
         public static async Task<ApiResponse> PostAsync(Request _requisicao, Page _page = null)
         {
             var _load = new LoadPage();

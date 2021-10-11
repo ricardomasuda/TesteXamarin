@@ -11,7 +11,6 @@ namespace CrudApp.Controllers
     public class EstoqueController : ControllerBase
     {
 
-
         [Route("/api/[controller]")]
         [HttpGet]
         public Response GetListEstoque()
@@ -30,8 +29,6 @@ namespace CrudApp.Controllers
             result.Status = "Erro";
             return result;
         }
-
-
 
 
         [Route("/api/[controller]/{IdEstoque}")]

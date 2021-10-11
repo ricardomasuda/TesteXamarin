@@ -4,7 +4,11 @@ using System.Text;
 
 namespace AppCrud.Model
 {
-    class Requests
+    class Request
     {
+        public interface IRequest
+        {
+            string Action { get; set; }
+        }
     }
 }
