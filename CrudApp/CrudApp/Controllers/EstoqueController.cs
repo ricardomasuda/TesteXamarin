@@ -18,11 +18,10 @@ namespace CrudApp.Controllers
             List<EstoqueModel> ListaEstoque = new List<EstoqueModel>();
             Response result = new Response();
             ListaEstoque = Estoque.ListarEstoque();
-
             if (Estoque != null)
             {
                 result.Status = "Sucesso";
-                result.Conteudo.Add(ListaEstoque);
+                result.Conteudo =ListaEstoque.Cast<object>().ToList();
                 return result;
             }
             result.Status = "Erro";
