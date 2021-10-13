@@ -50,7 +50,7 @@ namespace AppCrud.Model
 
             foreach (var estoqueAdd in await BuscarEstoque())
             {
-                await estoque.CadastrarAsync(estoqueAdd);
+                await estoque.CadastrarAsync(estoqueAdd,0);
             }
             return true;
         }
@@ -61,6 +61,7 @@ namespace AppCrud.Model
             var ListaPesquisa = await estoque.PesquisarTudoAsync();
             foreach (Estoque _estoque in ListaPesquisa)
             {
+             
                 var _request = new CadastrarEstoqueRequest(_estoque);
                 var response = await HttpRequest<CadastrarEstoqueRequest>.PostAsync(_request);
                 if (response != null)

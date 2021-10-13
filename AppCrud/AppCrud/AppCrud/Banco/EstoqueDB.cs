@@ -24,19 +24,13 @@ namespace AppCrud.Banco
         {
             return await Banco.Estoque.ToListAsync();
         }
-        public async Task<bool> CadastrarAsync(Estoque estoque)
+        public async Task<bool> CadastrarAsync(Estoque estoque, int status=1)
         {
-            try
-            {
-                estoque.Status = 1;
-                Banco.Estoque.Add(estoque);
-                int linhas = await Banco.SaveChangesAsync();
-                return (linhas > 0) ? true : false;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
+            estoque.Status = status;
+            Banco.Estoque.Add(estoque);
+            int linhas = await Banco.SaveChangesAsync();
+            return (linhas > 0) ? true : false;
+       
         }
 
         public async Task<bool> AtualizarAsync(Estoque estoque)

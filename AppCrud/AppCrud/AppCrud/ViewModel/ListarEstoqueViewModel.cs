@@ -14,19 +14,26 @@ namespace AppCrud.ViewModel
     {
         public ObservableCollection<Estoque> ListaEstoque { get { return _ListaEstoque; } set { _ListaEstoque = value; OnPropertyChanged("ListaEstoque"); } }
         public ObservableCollection<Estoque> _ListaEstoque { get; set; }
-        public Command Cadastrar { get; set; }
+        public Command CadastrarCmd { get; set; }
+        public Command SincronizarCmd { get; set; }
         public Command AtualizarEstoqueCmd { get; set; }
         public ListarEstoqueViewModel()
         {
 
        
             CarregarEstoque();
-            Cadastrar = new Command(CadastrarEstoque);
+            SincronizarCmd = new Command(Sincronizar);
+            CadastrarCmd = new Command(CadastrarEstoque);
             AtualizarEstoqueCmd = new Command(AtualizarEstoque);
         }
         public void CadastrarEstoque()
         {
             App.NavPage.PushAsync(new DetalheEstoque());
+        }
+        public void Sincronizar()
+        {
+            Estoque estoque = new Estoque();
+            estoque.Sincronizar();
         }
 
         public async void CarregarEstoque() 

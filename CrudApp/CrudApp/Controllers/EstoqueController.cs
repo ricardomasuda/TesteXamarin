@@ -10,8 +10,11 @@ namespace CrudApp.Controllers
     [ApiController]
     public class EstoqueController : ControllerBase
     {
+        
+
         [Route("/api/[controller]")]
         [HttpGet]
+
         public Response GetListEstoque()
         {
             EstoqueModel Estoque = new EstoqueModel();
@@ -54,7 +57,7 @@ namespace CrudApp.Controllers
             EstoqueModel Estoque = new EstoqueModel();
             Response result = new Response();
             var retorno = Estoque.SetEstoque(estoque);
-            if (retorno > 0)
+            if (retorno != null)
             {
                 result.Status = "Sucesso";
                 result.Conteudo.Add(retorno);
@@ -63,6 +66,7 @@ namespace CrudApp.Controllers
                 result.Status = "Erro";
             return result;
         }
+
 
         [HttpPut]
         [Route("/api/[controller]")]
