@@ -12,8 +12,8 @@ namespace AppCrud.ViewModel
 {
     class ListarEstoqueViewModel
     {
-
-        public ObservableCollection<Estoque> ListaEstoque { get; set; }
+        public ObservableCollection<Estoque> ListaEstoque { get { return _ListaEstoque; } set { _ListaEstoque = value; OnPropertyChanged("ListaEstoque"); } }
+        public ObservableCollection<Estoque> _ListaEstoque { get; set; }
         public Command Cadastrar { get; set; }
         public Command AtualizarEstoqueCmd { get; set; }
         public ListarEstoqueViewModel()
@@ -40,7 +40,15 @@ namespace AppCrud.ViewModel
             App.NavPage.PushAsync(new DetalheEstoque(estoque));
         }
 
-       
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string NameProperty)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(NameProperty));
+            }
+        }
 
     }
 }

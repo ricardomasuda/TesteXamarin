@@ -18,26 +18,56 @@ namespace AppCrud.Banco
         }
         public async Task<List<Estoque>> PesquisarAsync()
         {
+            return await Banco.Estoque.Where(u => u.Status != 3).ToListAsync();
+        }
+        public async Task<List<Estoque>> PesquisarTudoAsync()
+        {
             return await Banco.Estoque.ToListAsync();
         }
         public async Task<bool> CadastrarAsync(Estoque estoque)
         {
-            Banco.Estoque.Add(estoque);
-            int linhas = await Banco.SaveChangesAsync();
-            return (linhas > 0) ? true : false;
+            try
+            {
+                estoque.Status = 1;
+                Banco.Estoque.Add(estoque);
+                int linhas = await Banco.SaveChangesAsync();
+                return (linhas > 0) ? true : false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
-        public async Task<bool> AtualizarAsync(Estoque tarefa)
+        public async Task<bool> AtualizarAsync(Estoque estoque)
         {
-            Banco.Estoque.Update(tarefa);
+            estoque.Status = 2;
+            Banco.Estoque.Update(estoque);
             int linhas = await Banco.SaveChangesAsync();
             return (linhas > 0) ? true : false;
         }
 
         public async Task<bool> ExcluirAsync(int id)
         {
-            Estoque tarefa = await ConsultarAsync(id);
-            Banco.Estoque.Remove(tarefa);
+            Estoque estoque = await ConsultarAsync(id);
+            estoque.Status = 3;
+            Banco.Estoque.Update(estoque);
+            //Banco.Estoque.Remove(tarefa);
+            int linhas = await Banco.SaveChangesAsync();
+            return (linhas > 0) ? true : false;
+        }
+        public async Task<bool> ExcluirTotalAsync(int id)
+        {
+            Estoque estoque = await ConsultarAsync(id);
+            Banco.Estoque.Remove(estoque);
+            int linhas = await Banco.SaveChangesAsync();
+            return (linhas > 0) ? true : false;
+        }
+
+        public async Task<bool> AlteraState(Estoque estoque)
+        {
+            estoque.Status = 0;
+            Banco.Estoque.Update(estoque);
             int linhas = await Banco.SaveChangesAsync();
             return (linhas > 0) ? true : false;
         }

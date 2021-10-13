@@ -15,7 +15,7 @@
                     <Entry BackgroundColor="LightGray" Text="{Binding Estoque.Nome}" />
                 </StackLayout>
                 <StackLayout>
-                    <Label Text="Qunatidade:" TextColor="Black" FontSize="12"/>
+                    <Label Text="Quantidade:" TextColor="Black" FontSize="12"/>
                     <Entry BackgroundColor="LightGray" Keyboard="Numeric" Text="{Binding Estoque.Quantidade}"/>
                 </StackLayout>
                 <Button
@@ -27,7 +27,7 @@
                 <Button
                     Margin="0,20,0,10"
                     BackgroundColor="#6ed1e4"
-                    Text="Deleter"
+                    Text="Apagar"
                     IsVisible="{Binding ViewBotao}"
                     Command="{Binding DeleterCmd}"
                     />

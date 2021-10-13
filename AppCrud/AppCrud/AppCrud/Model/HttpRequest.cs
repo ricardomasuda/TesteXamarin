@@ -1,4 +1,4 @@
-﻿using AppCrud.View.PopUp;
+﻿
 using Newtonsoft.Json;
 using Rg.Plugins.Popup.Extensions;
 using System;
@@ -24,10 +24,10 @@ namespace AppCrud.Model
         const string URL = "https://crudappapi.azurewebsites.net/api/";
         public static async Task<ApiResponse> PostAsync(Request _requisicao, Page _page = null)
         {
-            var _load = new LoadPage();
+            //var _load = new LoadPage();
             ApiResponse _return;
-            if (_page != null)
-                await _page.Navigation.PushPopupAsync(_load);
+            //if (_page != null)
+            //    await _page.Navigation.PushPopupAsync(_load);
             try
             {
                 var _json = JsonConvert.SerializeObject(_requisicao);
@@ -64,16 +64,16 @@ namespace AppCrud.Model
                 Debug.WriteLine(exp);
                 _return = default(ApiResponse);
             }
-            if (_page != null)
-                _load.Close();
+            //if (_page != null)
+            //    _load.Close();
             return _return;
         }
         public static async Task<ApiResponse> GetAsync(Request _requisicao, Page _page = null)
         {
             ApiResponse _return;
-            var _load = new LoadPage();
-            if (_page != null)
-                await _page.Navigation.PushPopupAsync(_load);
+            //var _load = new LoadPage();
+            //if (_page != null)
+            //    await _page.Navigation.PushPopupAsync(_load);
             try
             {
                 var _url = URL + ((IRequest)_requisicao).Action;
@@ -103,8 +103,8 @@ namespace AppCrud.Model
                 Debug.WriteLine(exp);
                 _return = default(ApiResponse);
             }
-            if (_page != null)
-                _load.Close();
+            //if (_page != null)
+            //    _load.Close();
             return _return;
         }
 

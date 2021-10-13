@@ -18,5 +18,15 @@ namespace AppCrud.Model
                 Action = action;
             }
         }
+        public class CadastrarEstoqueRequest : IRequest
+        {
+            public string Action { get; set; }
+            public Estoque Estoque { get; set; }
+            public CadastrarEstoqueRequest(Estoque _estoque)
+            {
+                Action = "/api/Estoque";
+                Estoque = _estoque;
+            }
+        }
     }
 }

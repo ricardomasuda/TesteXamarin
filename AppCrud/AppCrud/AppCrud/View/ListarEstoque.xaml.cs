@@ -16,12 +16,13 @@ namespace AppCrud.View
     {
         public ListarEstoque()
         {
+           
             InitializeComponent();
-            Estoque Estoque = new Estoque();
-            Estoque.BuscarEstoque(this);
+            
         }
         protected override void OnAppearing()
         {
+          
             base.OnAppearing();
             BindingContext = new ListarEstoqueViewModel();
         }

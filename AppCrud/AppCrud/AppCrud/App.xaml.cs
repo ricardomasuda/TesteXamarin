@@ -1,5 +1,6 @@
 ﻿using AppCrud.View;
 using System;
+using AppCrud.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,15 +11,16 @@ namespace AppCrud
         public static NavigationPage NavPage { get; set; }
         public App()
         {
+            
             InitializeComponent();
-
-      
-            NavPage = new NavigationPage(new ListarEstoque());
-            MainPage = NavPage;
         }
 
-        protected override void OnStart()
+        protected  override void OnStart()
         {
+            Estoque Estoque = new Estoque();
+            Estoque.LimparBase();
+            NavPage = new NavigationPage(new ListarEstoque());
+            MainPage = NavPage;
         }
 
         protected override void OnSleep()

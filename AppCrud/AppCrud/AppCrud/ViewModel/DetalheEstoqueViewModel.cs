@@ -25,7 +25,7 @@ namespace AppCrud.ViewModel
         }
         public  void Salvar()
         {
-            if (Estoque == null)
+            if (Estoque.Id == 0)
                 Cadastrar();
             else
                 Atualizar();
@@ -37,7 +37,7 @@ namespace AppCrud.ViewModel
             if (Validar())
             {
                 if (await Estoquebanco.CadastrarAsync(Estoque))
-                    await Page.DisplayAlert("Cadastrado", "Item Cadastrado com sucesso", "ok");
+                    await Page.DisplayAlert("Cadastrado", "Item cadastrado com sucesso", "ok");
                 else
                     await Page.DisplayAlert("Não cadastrado", "Não foi possivel cadastrar", "ok");
             }
@@ -51,7 +51,7 @@ namespace AppCrud.ViewModel
                 if (await Estoquebanco.AtualizarAsync(Estoque))
                     await Page.DisplayAlert("Atualizado", "Item atualizado com sucesso", "ok");
                 else
-                    await Page.DisplayAlert("Não atualizado", "Não foi possivel cadastrar", "ok");
+                    await Page.DisplayAlert("Não atualizado", "Não foi possivel atualizado", "ok");
             }
         }
         public async void DeletetarEstoque()
@@ -74,6 +74,7 @@ namespace AppCrud.ViewModel
                 Page.DisplayAlert("Nome não pode ser vazio","insira o nome","ok");
                 return false;
             }
+            
             if (Estoque.Quantidade == 0)
             {
                 Page.DisplayAlert("Quantidade não pode ser 0", "insira um valor", "ok");
